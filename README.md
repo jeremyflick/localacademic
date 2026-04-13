@@ -39,7 +39,7 @@ Start the local app server:
 python3 server.py
 ```
 
-Then visit [http://127.0.0.1:8000](http://127.0.0.1:8000).
+Then visit [https://core.ac.uk/services/api](https://core.ac.uk/services/api).
 
 If `CORE_API_KEY` is not configured, the app will still work with OpenAlex, Crossref, and Europe PMC, and the UI will show a small note that CORE is unavailable on that server.
 
