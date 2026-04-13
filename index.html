@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LocalAcademic</title>
+    <meta
+      name="description"
+      content="Research query-driven statistics from recent reputable academic sources and format them for citation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero">
+        <article class="hero-copy panel">
+          <p class="eyebrow">Statistics Search And Research</p>
+          <h1>Turn any query into citation-ready evidence.</h1>
+          <p class="hero-text">
+            This research app searches recent academic sources, extracts supported statements,
+            and formats the results into the exact plain-text structure needed for
+            statistics-driven research briefs.
+          </p>
+          <div class="hero-actions">
+            <button class="hero-chip" type="button" data-sample-query="urban heat islands and public health">
+              Urban heat and health
+            </button>
+            <button class="hero-chip" type="button" data-sample-query="microplastics exposure and human health">
+              Microplastics exposure
+            </button>
+            <button class="hero-chip" type="button" data-sample-query="drug use and mental health">
+              Drug use and mental health
+            </button>
+          </div>
+        </article>
+
+        <aside class="hero-side panel">
+          <div>
+            <p class="mini-label">Research Rules</p>
+            <p class="stat-total" id="entry-count">0</p>
+            <p class="subtle">Compiled entries ready for plain-text export.</p>
+          </div>
+
+          <div class="metric-strip">
+            <div class="metric">
+              <span class="metric-label">Priority</span>
+              <strong id="year-mode">Awaiting search</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Sources</span>
+              <strong id="source-count">0</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Scope</span>
+              <strong>Academic</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="workspace">
+        <form id="research-form" class="query-panel panel">
+          <div class="control-group control-group-wide">
+            <label for="query-input">Search query</label>
+            <input
+              id="query-input"
+              type="search"
+              placeholder="Try: climate migration and housing markets"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="control-group">
+            <label for="limit-input">Entries</label>
+            <input id="limit-input" type="number" min="5" max="12" value="6" />
+          </div>
+
+          <button id="run-button" class="button button-accent" type="submit">Run research</button>
+          <button id="reset-button" class="button" type="button">Reset</button>
+        </form>
+
+        <section class="guidance-grid">
+          <article class="panel note-card">
+            <p class="mini-label">What The App Enforces</p>
+            <ul class="compact-list">
+              <li>Searches 2024+ sources first, then falls back to 2020+ only if needed.</li>
+              <li>Prioritizes stronger evidence signals such as meta-analyses, population-based studies, longitudinal work, and higher-impact sources.</li>
+              <li>Builds 3 to 7 supported items per result when enough relevant abstract evidence is available, including sample sizes and article counts.</li>
+              <li>Uses relevant paper summaries only when no exact statistics are available for that source.</li>
+              <li>Requires source-backed output only.</li>
+              <li>Stays concise and omits unsupported claims.</li>
+            </ul>
+
+            <p class="mini-label tool-section-label">Known Limits</p>
+            <ul class="compact-list">
+              <li>The app relies on source abstracts, not full text.</li>
+              <li>Some papers do not report detailed statistics in the abstract.</li>
+              <li>Citation formatting depends on available metadata from the source record.</li>
+            </ul>
+
+            <p class="mini-label tool-section-label">How To Get Better Results</p>
+            <ul class="compact-list">
+              <li>Use specific search phrases instead of broad topics.</li>
+              <li>Try population + outcome + context, like "adolescents cannabis use depression".</li>
+              <li>Narrow queries when abstracts are too general.</li>
+              <li>Broader queries may return weaker supported items.</li>
+            </ul>
+          </article>
+
+          <article class="panel note-card">
+            <p class="mini-label">Current Live Source Mode</p>
+            <p class="subtle">
+              The app uses OpenAlex, Crossref, and Europe PMC for live academic-source
+              discovery, with optional CORE integration available through the backend. It
+              currently relies mainly on abstract text when extracting supported items.
+            </p>
+            <p id="core-status-note" class="subtle subtle-note" hidden></p>
+
+            <p class="mini-label tool-section-label">Free Research Tools</p>
+            <p class="subtle">
+              Add these free browser tools to speed up article discovery and full-text access
+              while you research.
+            </p>
+
+            <div class="tool-links">
+              <a
+                class="tool-link"
+                href="https://addons.mozilla.org/en-US/firefox/addon/lazy-scholar/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="tool-icon" aria-hidden="true">
+                  <img src="./assets/lazyscholar.webp" alt="" />
+                </span>
+                <span>Lazy Scholar for Firefox</span>
+              </a>
+
+              <a
+                class="tool-link"
+                href="https://chromewebstore.google.com/detail/lazy-scholar/fpbdcofpbclblalghaepibbagkkgpkak"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="tool-icon" aria-hidden="true">
+                  <img src="./assets/lazyscholar.webp" alt="" />
+                </span>
+                <span>Lazy Scholar for Chrome</span>
+              </a>
+
+              <a
+                class="tool-link"
+                href="https://www.getfulltextresearch.com/getftr-browser-extension"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="tool-icon" aria-hidden="true">
+                  <img src="./assets/getftr.webp" alt="" />
+                </span>
+                <span>GetFTR Browser Extension</span>
+              </a>
+
+              <a
+                class="tool-link"
+                href="https://scite.ai/extension-install"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="tool-icon" aria-hidden="true">
+                  <img src="./assets/scite.webp" alt="" />
+                </span>
+                <span>Scite Browser Extension</span>
+              </a>
+
+              <a
+                class="tool-link"
+                href="https://unpaywall.org/products/extension"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="tool-icon" aria-hidden="true">
+                  <img src="./assets/unpaywall.webp" alt="" />
+                </span>
+                <span>Unpaywall Browser Extension</span>
+              </a>
+
+              <a
+                class="tool-link"
+                href="https://www.oahelper.org"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <span class="tool-icon" aria-hidden="true">
+                  <img src="./assets/openaccesshelper.webp" alt="" />
+                </span>
+                <span>Open Access Helper Extension</span>
+              </a>
+            </div>
+          </article>
+        </section>
+
+        <p id="status-line" class="status-line" data-state="default">Ready for a new query.</p>
+
+        <section class="results-layout">
+          <div class="results-stack">
+            <header class="results-bar panel">
+              <div>
+                <p class="mini-label">Structured Entries</p>
+                <h2>Evidence extracted from retrieved sources</h2>
+              </div>
+              <p class="subtle">Designed to match the required output format exactly.</p>
+            </header>
+
+            <section id="results-list" class="results-list" aria-live="polite"></section>
+          </div>
+
+          <aside class="sidebar-stack">
+            <section class="potential-panel panel">
+              <div class="output-head">
+                <div>
+                  <p class="mini-label">Potential Sources To Review</p>
+                  <h3>Relevant sources without usable abstract evidence</h3>
+                </div>
+              </div>
+
+              <div id="potential-sources-list" class="potential-sources-list" aria-live="polite"></div>
+            </section>
+
+            <section class="output-panel panel">
+              <div class="output-head">
+                <div>
+                  <p class="mini-label">Plain-Text Output</p>
+                  <h3>Ready to cite</h3>
+                </div>
+                <button id="copy-button" class="button" type="button" disabled>Copy output</button>
+              </div>
+
+              <textarea
+                id="output-box"
+                readonly
+                spellcheck="false"
+                placeholder="Research results will appear here in the required plain-text format."
+              ></textarea>
+
+              <section class="citation-panel">
+                <div class="citation-head">
+                  <div>
+                    <p class="mini-label">Source Citations</p>
+                    <h3>APA, MLA, Chicago</h3>
+                  </div>
+                  <button id="copy-citations-button" class="button" type="button" disabled>Copy citations</button>
+                </div>
+
+                <div class="citation-actions">
+                  <button id="apa-button" class="button" type="button" disabled>Generate APA</button>
+                  <button id="mla-button" class="button" type="button" disabled>Generate MLA</button>
+                  <button id="chicago-button" class="button" type="button" disabled>Generate Chicago</button>
+                </div>
+
+                <textarea
+                  id="citations-box"
+                  readonly
+                  spellcheck="false"
+                  placeholder="Generated citations will appear here."
+                ></textarea>
+              </section>
+            </section>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <template id="result-template">
+      <article class="result-card">
+        <div class="result-top">
+          <div>
+            <p class="result-index"></p>
+            <h3>
+              <a class="result-title-link" href="#" target="_blank" rel="noreferrer noopener">
+                <span class="result-title"></span>
+              </a>
+            </h3>
+          </div>
+          <div>
+            <p class="result-kind"></p>
+            <p class="result-meta"></p>
+          </div>
+        </div>
+
+        <section>
+          <p class="mini-label">Relevant Summary</p>
+          <p class="result-rationale"></p>
+        </section>
+
+        <section>
+          <p class="mini-label">Supported Items</p>
+          <ul class="compact-list result-stats"></ul>
+        </section>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
